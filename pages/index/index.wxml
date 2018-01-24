@@ -1,13 +1,28 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
 </view>
+<form class="frm" bindsubmit="formSubmit" bindreset="formReset">
+  <view class="section">
+    <view class="section__name">Name</view>
+    <input name="username" placeholder="please input your name" />
+  </view>
+  <view class="section">
+    <view class="section__phone_number">Mobile Number:</view>
+    <input name="phonenumber" placeholder="please input your mobile number" />
+  </view>
+  <view class="section">
+    <view class="section__email">Email:</view>
+    <input name="email" placeholder="please input your email address" />
+  </view>
+  <view class="section">
+    <view class="section__birth_date">Birthdate:</view>
+    <input name="birthdate" placeholder="please input your birth date" />
+  </view>
+  <view class="btn-area">
+    <button formType="submit">Submit</button>
+    <button formType="reset">Reset</button>
+  </view>
+</form>   
