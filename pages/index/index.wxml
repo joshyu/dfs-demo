@@ -14,20 +14,29 @@
 <form wx:if="{{hasUserInfo}}" class="frm" bindsubmit="formSubmit" bindreset="formReset">
   <view class="section">
     <view class="section__name">Name</view>
-    <input name="username" placeholder="please input your name" />
+    <input name="username" class="{{formErrors['username']?'form-invalid':''}}" placeholder="please input your name" auto-focus/>
+    <view class="form_error_message" wx:if="{{formErrors['username']}}">{{formErrors['username']['msg']}}</view>
   </view>
+
   <view class="section">
     <view class="section__phone_number">Mobile Number:</view>
-    <input name="phonenumber" placeholder="please input your mobile number" />
+    <input name="phonenumber" class="{{formErrors['phonenumber']?'form-invalid':''}}" type="number" placeholder="please input your mobile number" />
+    <view class="form_error_message" wx:if="{{formErrors['phonenumber']}}">{{formErrors['phonenumber']['msg']}}</view>
   </view>
+
   <view class="section">
     <view class="section__email">Email:</view>
-    <input name="email" placeholder="please input your email address" />
+    <input name="email"  class="{{formErrors['email']?'form-invalid':''}}" placeholder="please input your email address" />
+    <view class="form_error_message" wx:if="{{formErrors['email']}}">{{formErrors['email']['msg']}}</view>
   </view>
+
   <view class="section">
-    <view class="section__birth_date">Birthdate:</view>
-    <input name="birthdate" placeholder="please input your birth date" />
+     <picker name="birthdate" mode="date" value="{{date}}" bindchange="bindDateChange">
+      <view class="picker {{formErrors['birthdate']?'form-invalid':''}}">Birthdate: {{date}}</view>
+      <view class="form_error_message" wx:if="{{formErrors['birthdate']}}">{{formErrors['birthdate']['msg']}}</view>
+    </picker>
   </view>
+
   <view class="btn-area">
     <button formType="submit" class="button-primary">Submit</button>
     <button formType="reset">Reset</button>

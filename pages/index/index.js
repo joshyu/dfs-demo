@@ -1,16 +1,46 @@
-//index.js
-//获取应用实例
+/**
+ *Index.js
+ *
+ **/
+
+import {
+  showToast
+} from '../../utils/util';
 const app = getApp()
 
 Page({
   data: {
     motto: 'Welcome to Coupon Application Form ',
     userInfo: {},
-    get leadList() {
-      return app.leadList
-    },
+    formErrors: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },
+
+  validation: {
+    rules: {
+      username: {
+        required: true,
+      },
+
+      phonenumber: {
+        required: true,
+        tel: true,
+        uniquePhone: true
+      },
+
+      email: {
+        required: true,
+        email: true,
+        uniqueEmail: true
+      },
+      birthdate: {
+        required: true,
+        date: true
+      }
+    },
+
+    messages: {}
   },
 
   onLoad() {
@@ -20,8 +50,6 @@ Page({
         hasUserInfo: true
       })
     } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
@@ -30,8 +58,8 @@ Page({
       }
     }
   },
-  
-  getUserInfo (e) {
+
+  getUserInfo(e) {
     app.userInfo = e.detail.userInfo;
     this.setData({
       userInfo: e.detail.userInfo,
@@ -39,12 +67,37 @@ Page({
     })
   },
 
-  formSubmit (e) {
-    const params = e.detail.value;
-    debugger;
+  bindDateChange(e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
+
+  formSubmit(e) {
+    const formModel = e.detail.value;
+    app.validate(e, this.validation.rules, this.validation.messages)
+      .then(() => {
+        app.appendItem(formModel);
+        showToast('submit OK!');
+
+        wx.navigateTo({
+          url: '../coupon/coupon'
+        });
+      })
+      .catch((errors) => {
+        this.setData({
+          formErrors: errors
+        });
+
+
+        //console.log(errors);
+      });
   },
 
   formReset(e) {
-
+    this.setData({
+      formErrors: {},
+      date: ''
+    });
   }
 })

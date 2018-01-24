@@ -8,6 +8,22 @@
 class App {
   constructor() {
     this.leadList = wx.getStorageSync('leadList') || [];
+    /*this.appendItem({
+      username: 'josh',
+      phonenumber: '15542316917',
+      email: 'p.yu@accenture.com',
+      birthdate: '1979/07/07',
+      timestamp: '3131243124312'
+    }, false);
+
+    this.appendItem({
+      username: 'andy',
+      phonenumber: '15542316918',
+      email: 'andy.lpqin@accenture.com',
+      birthdate: '1979/01/07',
+      timestamp: '31312431ss24312'
+    }, false);*/
+
     this.userInfo = null;
   }
 
@@ -40,7 +56,9 @@ class App {
   }
 
   appendItem(item, sync = true) {
+    item.timestamp = Date.now();
     this.leadList.push(item);
+
     if (sync) {
       wx.setStorageSync('leadList', this.leadList);
     }

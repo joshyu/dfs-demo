@@ -1,0 +1,16 @@
+<view class="container mg-top-50">
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  <view class="userinfo">
+    <button class="userinfo-button button-primary" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> Sign In With Wechat Account </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="coupon-result">
+    <text class="coupon-label">Coupon Code:</text>
+    <text class="coupon-value">{{userInfo.coupon}} </text>
+  </view>
+</view> 
