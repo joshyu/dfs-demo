@@ -18,12 +18,16 @@ App({
     app.appendItem(item);
   },
 
-  getLeadList(){
+  get leadList(){
     return app.leadList;
   },
 
   get userInfo(){
     return app.userInfo;
+  },
+
+  set userInfo(userInfo){
+    app.userInfo = userInfo;
   }
 
 

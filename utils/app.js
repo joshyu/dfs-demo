@@ -8,7 +8,7 @@
 class App {
   constructor() {
     this.leadList = wx.getStorageSync('leadList') || [];
-    this.userInfo = {};
+    this.userInfo = null;
   }
 
   init(context) {

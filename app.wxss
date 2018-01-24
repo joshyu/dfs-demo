@@ -1,2 +1,3 @@
 @import "./styles/base.wxss";
 @import "./styles/forms.wxss";
+@import "./styles/common.wxss";
